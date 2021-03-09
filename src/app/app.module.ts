@@ -11,28 +11,33 @@ import { Tealium, TealConfig } from '@ionic-native/tealium/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, Tealium],
-  exports: [Tealium],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  // exports: [Tealium],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Tealium],
   bootstrap: [AppComponent],
 })
 export class AppModule implements OnInit {
   // constructor() {}
-  constructor(private tealium: Tealium) { }
-
-  
-  ngOnInit(): void {
-    let tealConfig: TealConfig = {
-      account: "services-naryu-ohga",
-      profile: "angular",
-      environment: "dev", // usually "dev", "qa" or "prod"
-      isLifecycleEnabled: "false", // pass "false" to disable lifecycle tracking
-      isCrashReporterEnabled: "false", // pass "true" to enable crash reporter (Android only)
-      instance: "shopapp" // an arbitrary instance name. use the same instance name for all subsequent API calls
-     }
-    
-    this.tealium.init(tealConfig).then(()=>{
-      this.tealium.trackView({"screen_name": "homescreen"}, "shopapp");
-    });
+  constructor(private tealium: Tealium) {
+    // this.initTealium();
   }
+
+
+  ngOnInit(): void {}
+
+
+  // initTealium() {
+  //   console.log('AppModule: ngOnInit Tealium');
+  //   let tealConfig: TealConfig = {
+  //     account: "services-naryu-ohga",
+  //     profile: "angular",
+  //     environment: "dev", // usually "dev", "qa" or "prod"
+  //     isLifecycleEnabled: "false", // pass "false" to disable lifecycle tracking
+  //     isCrashReporterEnabled: "false", // pass "true" to enable crash reporter (Android only)
+  //     instance: "shopapp" // an arbitrary instance name. use the same instance name for all subsequent API calls
+  //   }
+  //   this.tealium.init(tealConfig).then(()=>{
+  //     this.tealium.trackView({"screen_name": "homescreen"}, "shopapp");
+  //   });
+  // }
 }
